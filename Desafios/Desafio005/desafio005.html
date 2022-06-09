@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de medidas</title>
+
+    <style>
+        body {
+            background: rgb(112, 112, 245);
+        }
+
+        input#conv {
+            color: rgb(253, 253, 253);
+            background: rgb(123, 54, 187);
+            height: 100px;
+            width: 250px;
+            border-radius: 50px;
+        }
+
+        div#res {
+            color: aliceblue;
+            font: normal 12pt Arial;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Conversor de Medidas</h1>
+    <br>
+    <input type="button" value="Converter" id='conv' onclick="conv()">
+    <hr>
+    <div id="res">Clique no botão acima para inserir OBS:use '.' em vem de 'vírgula'</div>
+    <script>
+        function conv(params) {
+            let m = Number(prompt('Digite uma distância em metros(m)'))
+            let km = Number(m / 1000)
+            let hm = Number(m / 100)
+            res.innerHTML = `A distância de ${m} metros, corresponde a..<br>
+            ${km} em Km (Quilômetros)
+            <br>
+            ${hm} em Hm (Hectrômetros)`
+
+        }
+    </script>
+</body>
+
+</html>

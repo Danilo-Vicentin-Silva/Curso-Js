@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input {
+            height: 70px;
+            width: 250px;
+        }
+
+        body {
+            font: normal 16px Arial;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Calcular desconto</h1>
+    <input type="button" value="Desconto" onclick="desc()">
+    <br>
+    <p id="res">Clique no botão acima para iniciar</p>
+
+
+
+    <script>
+        let res = document.querySelector('p#res')
+
+        function desc(params) {
+
+            let produ = prompt('Qual é o produto que você está comprando?')
+            let preço = Number(prompt(`Qual é o preço de ${produ} ?`))
+            let de = Number(prompt('Qual é o desconto aplicado?'))
+
+            if (produ == 0 || preço <= 0 || de <= 0) {
+                alert('Insira os dados corretamente!')
+            } else {
+                let desc = (de / 100) * preço
+                let final = preço - desc
+
+                res.innerHTML = `<h2>Calculando desconto de 10% para ${produ}</h2>
+                <p>O preço original era ${preço }.</p>
+                <p>Você acaba de ganhar R$${desc} com o desconto{${de}%}.</p>
+                <p>No fim, você vai pagar R$${final.toFixed(2).replace('.',',')} no produto ${produ}.</p>`
+            }
+
+
+
+        }
+    </script>
+</body>
+
+</html>

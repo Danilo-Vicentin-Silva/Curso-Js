@@ -1,0 +1,25 @@
+        input#botão1 {
+            height: 80px;
+            width: 150px;
+            border-radius: 20px;
+            color: rgb(251, 255, 0);
+            background: black;
+        }
+        
+        input#botão2 {
+            height: 80px;
+            width: 150px;
+            border-radius: 20px;
+            margin-right: 50px;
+            margin-left: 50px;
+            color: rgb(251, 255, 0);
+            background: black;
+        }
+        
+        input#botão3 {
+            height: 80px;
+            width: 150px;
+            border-radius: 20px;
+            color: rgb(251, 255, 0);
+            background: black;
+        }

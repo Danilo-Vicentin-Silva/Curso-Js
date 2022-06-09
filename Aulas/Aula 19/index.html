@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulando Strings</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Strings</h1>
+    <p>Existem várias formas de 'manipular' <strong><abbr title="palavras ou caracteres">strings</abbr></strong> em
+        JavaScript, e com isso fazer várias aplicações sobre essa possibilidade.
+    </p>
+    <h2>Manipulador de Strings</h2>
+    <!---------Informações gerais---------->
+    <p id="mostrarPalavra">Palavra</p>
+    <p id="numeroLetras">Numero caracteres</p>
+    <p id="caixaAltaBaixa">Caixa alta/baixa</p>
+    <p id="colorirAzul">Coloir Azul</p>
+    <!-----------Interação--------->
+    <p>Digite uma 'parte' da palavra para ver se ela existe:</p><input type="text" id="procurarSubstring"> <input
+        type="button" value="Procurar parte">
+        <p id="resPartSubstring"></p>
+
+    <p>Procurar 'parte' da palavra por posição numérica:</p>
+    <input type="number" id="partePorNumero"> <input type="button" value="Procurar parte">
+    <p id="resPartNumber"></p>
+
+    <p>Digite duas letras para substituir elas na palavra:</p>
+    <div>
+        Digite uma letra existente na palavra: <input type="text" id="substituir1"> e digite uma letra que queira
+        substituir por ela: <input type="text" id="substituir2"> <input type="button" value="Substituir">
+        <p id="resSubstituir"></p>
+    </div>
+    
+    <p>JavaScript é uma linguagem de programção com muitas possibilidades! Isso é só um <small></small> gostinho</p>
+    <script src="code.js"></script>
+</body>
+
+</html>

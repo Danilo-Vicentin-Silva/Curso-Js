@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de temperaturas</title>
+    <Style>
+        body {
+            font: normal 16pt Arial;
+            background: aquamarine;
+        }
+
+        input {
+            background: cornflowerblue;
+            color: rgb(0, 0, 0);
+            width: 200px;
+            height: 70px;
+        }
+    </Style>
+</head>
+
+<body>
+    <h1>Conversor de temperaturas</h1>
+    <p>Ultilize ponto em vez de vírgula <strong>(padrão americano)</strong></p>
+    <div>
+
+        <input type="button" value="Converter(ºC)" onclick="converC()
+        ">
+        <input type="button" value="Converter(ºK)" onclick="converK()
+        ">
+        <input type="button" value="Converter(ºF)" onclick="converF()
+        ">
+
+    </div>
+    <hr>
+    <div id="res">Clique no botão acima para iniciar</div>
+
+    <script>
+        let res = document.querySelector('div#res')
+
+        function converC(params) {
+            let c = Number(prompt('Informe a temperatura em Celcius(ºC)'))
+            let f = c * 1.8 + 32
+            let k = c + 273.15
+
+            res.innerHTML = `<p>A temperatura de ${c.toFixed(3).replace('.', ',')} ºC, corresponde a...</p>
+            <p>${f.toFixed(3).replace('.', ',')}ºF</p>
+            <p>${k.toFixed(3).replace('.', ',')}K</p><br>
+            Valores convertidos para 3 casas decimais`
+        }
+
+
+        function converK(params) {
+            let k = Number(prompt('Informe a temperatura em Kelvin(K)'))
+            let f = (k - 273.15) * 1.8 + 32
+            let c = k - 273.15
+
+            res.innerHTML = `<p>A temperatura de ${k.toFixed(3).replace('.', ',')} ºC, corresponde a...</p>
+            <p>${f.toFixed(3).replace('.', ',')}ºF</p>
+            <p>${c.toFixed(3).replace('.', ',')}ºC</p><br>
+            Valores convertidos para 3 casas decimais`
+        }
+
+        function converF(params) {
+            let f = Number(prompt('Informe a temperatura em Fahrenheit(ºF)'))
+            let c = f - 32 / 1.8
+            let k = f - 32 / 1.8 + 273.15
+
+            res.innerHTML = `<p>A temperatura de ${f.toFixed(3).replace('.', ',')} ºF, corresponde a...</p>
+            <p>${c.toFixed(3).replace('.', ',')}ºC</p>
+            <p>${c.toFixed(3).replace('.', ',')}ºC</p><br>
+            Valores convertidos para 3 casas decimais`
+        }
+    </script>
+</body>
+
+</html>

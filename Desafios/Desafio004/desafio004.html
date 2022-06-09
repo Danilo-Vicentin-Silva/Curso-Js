@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de troco</title>
+    <style>
+        input {
+            height: 70px;
+            width: 200px;
+            border-radius: 100px;
+            text-align: center;
+        }
+        p#r {
+            font: normal 16pt Arial;
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Calculando o troco</h1>
+    <input type="button" value="Comprar produto" onclick="buy()">
+    <div id="res"></div>
+
+    <script>
+        function buy(params) {
+            let produto = prompt('Qual é o produto que você está comprando')
+            let preço = prompt(`Qual é o preço do ${produto} que você está comprando?`)
+            let pago = prompt(`Quanto você está pagando no ${produto}?`)
+            let troco = preço - pago
+            res.innerHTML = `<p id='r'>Você comprou ${produto} que custou ${preço}R$. <br> Deu ${pago}R$ e vai receber ${troco}R$ de troco. <br> Volte sempre! <p>`
+        }
+    </script>
+
+</body>
+
+</html>

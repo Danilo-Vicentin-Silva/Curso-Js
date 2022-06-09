@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ano bisssexto</title>
+    <style>
+        body {
+            font: normal 16pt Arial;
+        }
+
+        input {
+            width: 170px;
+            height: 70px;
+        }
+
+        mark#bix {
+            color: rgba(0, 128, 0, 0.671);
+            background: rgb(2, 209, 2);
+        }
+
+        mark#nbix {
+            color: rgb(255, 0, 0);
+            background: rgba(255, 0, 0, 0.39);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Ano Bissexto</h1>
+    <input type="button" value="Verificar" onclick="veri()">
+    <br><br>
+    <div id="res">Informe um ano para saber se ele é bissexto</div>
+
+    <script>
+        let res = document.querySelector('div#res')
+
+        function veri(params) {
+            let year = Number(prompt('Qual ano que você quer verificar?'))
+
+            if (isNaN(year)) {
+                alert('Insira APENAS NÚMEROS VÁLIDOS')
+            } else if (year % 4 == 0) {
+                res.innerHTML = `O ano de ${year} <mark id='bix'>É BISSEXTO</mark> &#x2705 `
+            } else {
+                res.innerHTML = `O ano de ${year} <mark id='nbix'>NÃO É BISSEXTO</mark> &#x274C `
+            }
+        }
+    </script>
+
+</body>
+
+</html>

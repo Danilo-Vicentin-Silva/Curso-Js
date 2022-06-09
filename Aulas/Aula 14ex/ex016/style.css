@@ -1,0 +1,37 @@
+body {
+    background-color: rgba(59, 59, 240, 0.842);
+    font: normal 16pt Arial;
+}
+
+header {
+    color: whitesmoke;
+    text-align: center;
+}
+
+section {
+    font: normal 16pt Arial;
+    background: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 15px;
+    width: 500px;
+    margin: auto;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.637);
+}
+
+footer {
+    color: whitesmoke;
+    text-align: center;
+    font-style: italic;
+}
+
+input#contar {
+    font: normal 12pt Arial;
+    color: rgb(189, 13, 13);
+    width: 70px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.637);
+}
+
+div#res {
+    color: darkred;
+    font: normal 16pt Arial;
+}

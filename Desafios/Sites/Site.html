@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de JavaScript</title>
+    <h1>Calculadora 2.0</h1>
+    <p>
+        Calculadoras de soma, subtração, divisão e multiplicação
+    </p>
+    <h1>Bem vindo ao site</h1>
+    <style>
+        body {
+            background-color: cadetblue;
+            font: 16pt TimesNewRoman
+        }
+        
+        p {
+            color: ivory;
+        }
+        
+        h1 {
+            font: normal Arial 5pt;
+            color: rgb(205, 227, 255);
+        }
+        
+        div {
+            font: normal 16px TimesNewRoman;
+            color: rgb(251, 255, 0)
+        }
+        
+        div#imagem {
+            text-align: center;
+            padding-left: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div #imagem>
+        <img src="Foto.png" alt="Foto">
+    </div>
+    <h2>Soma</h2>
+    <input type="Number" name="soma1" id="soma1"> +
+    <input type="Number" name="soma2" id="soma2">
+    <input type="button" value="Somar" onclick="Somar()">
+    <div id='res1'>Resultado</div>
+    <h3>Subtração</h3>
+    <input type="Number" name="menos1" id="menos1"> -
+    <input type="Number" name="menos2" id="menos2">
+    <input type="button" value="Subtrair" onclick="Subtrair()">
+    <div id='res2'>Resultado</div>
+    <h4>Multiplicação</h4>
+    <input type="number" name="multiplicação1" id="multiplicação1"> x
+    <input type="number" name="multiplicação2" id="multiplicação2">
+    <input type="button" value="Multiplicar" onclick="Multiplicar()">
+    <div id='res3'>Resultado</div>
+    <h5>Divisão</h5>
+    <input type="number" name="divisão1" id="divisão1"> /
+    <input type="number" name="divisão2" id="divisão2">
+    <input type="button" value="Dividir" onclick="Dividir()">
+    <div id='res4'>Resultado</div>
+
+    <script>
+        //Welcome
+        /*window.alert("Bem-vindo!")
+        var nome = window.prompt(`Qual é o seu nome?`)
+        var anos = window.prompt(`Quantos anos você tem?`)
+        document.write(`Seja bem vindo! ${nome.toLocaleUpperCase()} de ${anos.toLowerCase()} anos`)*/
+
+        //Funções
+        function Somar() {
+            var s1 = window.document.querySelector("input#soma1")
+            var s2 = window.document.querySelector("input#soma2")
+            var s1 = Number(soma1.value)
+            var s2 = Number(soma2.value)
+            var s = s1 + s2
+            var res1 = window.document.querySelector('div#res1')
+            res1.innerHTML = `A soma entre ${s1} e ${s2} resulta em <strong>${s}</strong>`
+        }
+
+        function Subtrair() {
+            var m1 = window.document.querySelector("input#menos1")
+            var m2 = window.document.querySelector("input#menos2")
+            var m1 = Number(menos1.value)
+            var m2 = Number(menos2.value)
+            var m = m1 - m2
+            var res2 = window.document.querySelector('div#res2')
+            res2.innerHTML = `A subtração entre ${m1} e ${m2} resulta em <strong>${m}</strong>`
+        }
+
+        function Multiplicar() {
+            var x1 = window.document.querySelector("input#multiplicação1")
+            var x2 = window.document.querySelector("input#multiplicação2")
+            var x1 = Number(multiplicação1.value)
+            var x2 = Number(multiplicação2.value)
+            var x = x1 * x2
+            var res3 = window.document.querySelector('div#res3')
+            res3.innerHTML = `A multiplicação entre ${x1} e ${x2} resulta em <strong>${x}</strong>`
+        }
+
+        function Dividir() {
+            var d1 = window.document.querySelector('input#divisão1')
+            var d2 = window.document.querySelector('input#divisão2')
+            var d1 = Number(divisão1.value)
+            var d2 = number(divisão2.value)
+            var d = d1 / d2
+            res4.innerHTML = `A divisão entre ${d1} e ${d2} resulta em <strong>${d}</strong>`
+        }
+    </script>
+</body>
+
+</html>

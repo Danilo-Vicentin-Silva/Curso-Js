@@ -1,0 +1,22 @@
+Planejamento do site em questão
+
+Tema: Manipulanmento de strings
+Planejamento em tópicos:
+- Este site vai mostrar algumas manipulações de 'strings' apartir do JavaScript
+- Irá aparecer um imput logo no inicío pedindo alguma palavra
+- Como tal o site irá usar o JavaScript para modificar a palavra de várias formas e mostar na tela:
+*Mostrar palavra digitada na tela
+*Dizer quantos caracteres tem a string
+*Irá mostrar a palavra em caixa alta e baixa
+*Colorir a string em azul
+{ 
+ *imput do tipo text para procurar uma 'substring' na string em si por palavra (parte dela)
+ *Imput do tipo number para procurar uma substring na string em si por posição
+ *Imput do tipo text para poder substituir letras por outras
+} - resultados abaixo em html
+- Paleta de cores
+#0D23FF 
+#0C5AE8
+#009DFF
+#0CCEE8
+#0DFFDA

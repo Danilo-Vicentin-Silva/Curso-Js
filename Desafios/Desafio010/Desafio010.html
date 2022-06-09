@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resolvendo Bhaskara</title>
+
+    <style>
+        input {
+            width: 200px;
+            height: 70px;
+        }
+
+        body {
+            font: normal 16pt Arial;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Resolvendo Bhaskara</h1>
+    <br>
+    <input type="button" value="Calcular" onclick="cal()">
+    <hr>
+    <div id="res">Considerando a equação no formato <strong>ax²+bx+c = 0</strong>, aperte o botão acima para culcular o
+        valor de &Delta;.</div>
+
+    <script>
+        function cal(params) {
+
+            let res = document.querySelector('div#res')
+            let a = Number(prompt('Valor de a?'))
+            let b = Number(prompt('Valor de b?'))
+            let c = Number(prompt('Valor de c?'))
+            if (a == '' || b == '' || c == '') {
+                res.innerHTML = (`Insira <strong>apenas números!</strong>`)
+            } else {
+                res.innerHTML = ''
+                res.innerHTML = `<h1>Resolvendo Bhaskara</h1>`
+                let del = b ** 2 - 4 * a * c
+                res.innerHTML += `<p>A equação atual é <strong>${a +'x² +  ' + b +'x +  '+ c + ' = 0  '}</strong>
+    <p>O cálculo realizado será <strong>&Delta; = ${b + '² - 4 . ' + a + ' . ' + c}</strong></p>
+    <p>O valor calculado foi <strong>&Delta; = ${del}</strong></p>`
+            }
+        }
+    </script>
+</body>
+
+</html>
