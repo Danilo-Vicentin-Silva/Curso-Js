@@ -1,42 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple DOM example</title>
-    <style>
-        .highlight {
-          color: white;
-          background-color: black;
-          padding: 10px;
-          width: 250px;
-          text-align: center;
-        }
-        </style>
-        
+    <title>APIs do navegador</title>
 </head>
 
 <body>
+    <header>
+        <h1>APIs do navegador</h1>
+        <p>É possível usar as APIs providos dele afim de manipular elementos HTML e CSS ativamente</p>
+    </header>
     <section>
-        <img src="dinosaur.png"
-            alt="A red Tyrannosaurus Rex: A two legged dinosaur standing upright like a human, with small arms, and a large head with lots of sharp teeth.">
-        <p>Here we will add a link to the <a href="https://www.mozilla.org/">Mozilla homepage</a></p>
+        <h2>Elementos globais principais</h2>
+        <img src="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents/document-window-navigator.png"
+            alt="DOM">
+        <a href="https://developer.mozilla.org">Créditos da imagem</a>
+        <p>Navegator</p>
+        <input type="button" id="button1" value="Pergunte a linguagem do navegador" onclick="navagLanguage()">
+        <hr>
+        <p>Window</p>
+        <input type="button" value="Chame um alert em Window" onclick="callAlert()">
+        <hr>
+        <p id="modP">Por fim, o elemento global Element</p>
+        <input type="button" value="manipule o elemento acima com Document" onclick="modDOM()">
+        <hr>
     </section>
-
+    <article>
+        <h1>Modelo de objetos de um Document</h1>
+        <ul>
+            <li>Root node</li>
+            <li>Child node</li>
+            <li>Descedent node</li>
+            <li>Parent node</li>
+            <li>Sibling node</li>
+        </ul>
+    </article>
+    <section>
+        <h1>Nodes</h1>
+        <p>Podemos fazer muitas coisas com os nodes, desde criá-los, até excluí-los</p>
+        <input type="button" value="modificar Elemento" onclick="addElement()">
+        <p id="genericP">Anexar elemento aqui</p>
+        <hr>
+        <p>Ou ainda, podemos remover Nodes</p>
+        <input type="button" value="Remover elemento" onclick="removeChild()">
+        <hr>
+        <p>Manipulando CSS com JavaScript</p>
+        <input type="button" value="Deixar as coisas mais bonitas" onclick="estilizarSite()">
+    </section>
+    <footer>
+        <p>Existem muito mais detalhes e funções que as APIs embutidas no navegador podem fazer...</p>
+    </footer>
     <script>
-        const link = document.querySelector('a');
-        const sect = document.querySelector('section');
-        const para = document.createElement('p');
-        const text = document.createTextNode('- the premier source for web development knowledge.');
-        const linkPara = document.querySelector('p');
+        function callAlert(params) {
+            window.alert('Chamado de um alert!')
+        }
 
-        link.textContent = 'Mozila Developer Network'
-        link.href = 'https://developer.mozila.org';
-        para.textContent = 'We hope you enjoyed the ride.';
-        sect.appendChild(para);
-        linkPara.appendChild(text);
-        para.setAttribute('class', 'highlight')
+        function navagLanguage(params) {
+            const lang = String(navigator.language)
+            alert(`Seu navegador está em ${lang}`)
+        }
+
+        function modDOM(params) {
+            const pElement = document.querySelector('#modP')
+            pElement.textContent = 'Parágrafo modificado pelo Document'
+        }
+
+        function addElement(params) {
+            const newP = document.createElement('p')
+            const genericP = document.querySelector('#genericP')
+            newP.textContent = 'Conteúdo anexado com Node.appendChild'
+            genericP.appendChild(newP)   
+        }
+
+        function removeChild(params) {
+            genericP.removeChild(newP)
+        }
+
+        function estilizarSite(params) {
+            const body = document.querySelector('body')  
+            body.style.background = '#8C48DB'
+            body.style.color ='white'
+        }
     </script>
 </body>
 

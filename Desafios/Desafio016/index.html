@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List</title>
+</head>
+<body>
+    <header>
+        <h1>My shopping list</h1>
+    </header>
+    <section>
+        Enter a new item: <input type="text" id="item"><input type="button" value="add item" onclick="addItem()">
+        <ul id="list"></ul>
+    </section>
+
+    <script>
+        const ul = document.querySelector('#list')
+
+        function addItem(params) {
+            const item = document.querySelector('#item').value
+            const li = document.createElement('li')
+
+            li.textContent = `${item}`
+            ul.appendChild(li)
+            const deleteButton = document.createElement('button')
+            deleteButton.addEventListener('click', () => ul.removeChild(li))
+            ul.appendChild(deleteButton)
+        }
+    </script>
+</body>
+</html>
