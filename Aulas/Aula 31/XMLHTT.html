@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+    <style>
+        * {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            color: aqua;
+
+            background-image: linear-gradient(to bottom, darkred, red);
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section>
+        <h1>Requisições</h1>
+        <p>Requisições ao servidor ultilizando o XMLHttpRequest</p>
+        <p><small>Existem inúmeras respostas do servidor (0-400)</small></p>
+    </section>
+
+    <script>
+        //Primeiro exemplo
+        /* 
+        var xhr = new XMLHttpRequest()
+        var documento
+
+        xhr.responseType = "json"
+        xhr.onreadystatechange = function (params) {
+
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                documento = xhr.response
+                console.log(documento)
+            }
+
+        }
+
+        xhr.open("GET", "https://jsonplaceholder.typicode.com/posts/1")
+
+        xhr.send()
+        */
+
+        //Segundo exemplo
+
+        var xhr = new XMLHttpRequest()
+        var documento = {
+            "userId": 200,
+            "id": 12,
+            "title": "Notícia exclusiva",
+            "body": "Programador Junior se especializa estudando pela Internet"
+        }
+
+        xhr.onreadystatechange = function () {
+
+            if (xhr.readyState == 4) {
+                console.log(xhr)
+            }
+
+        }
+
+
+        xhr.open("POST", "https://jsonplaceholder.typicode.com/posts") //status 201 representa criado
+        xhr.send(documento)
+    </script>
+</body>
+
+</html>
