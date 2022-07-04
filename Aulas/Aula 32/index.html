@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localStorage e session</title>
+</head>
+
+<body>
+    <h1>localStorage e sessionStorage</h1>
+
+    <script>
+        // localStorage
+        // Inserção de dados {chave}:{valor/item}
+        localStorage.setItem('name', 'Danilo')
+
+        // Resgatando itens do localStorage
+        const name = localStorage.getItem('name')
+        console.log('Welcome, ' + name, '!')
+
+        // Resgatando item que não existe
+        let lastName = localStorage.getItem('lastName')
+
+        // Removendo item
+        localStorage.removeItem('name')
+
+        // Limpando Tudo
+        localStorage.setItem('a', 1)
+        localStorage.setItem('b', 2)
+
+        //console.log(typeof localStorage.getItem('a'))
+
+        localStorage.clear()
+    </script>
+
+    <script>
+        // sessionStorage
+        sessionStorage.setItem('number', 123)
+
+        // No reinício há uma perda de dados
+
+        const n = sessionStorage.getItem('number')
+        console.log(n)
+
+        // sessionStorage.removeItem('number')
+
+        sessionStorage.clear()
+
+        // Salvar objeto
+        const person = {
+            name: 'Danilo',
+            age: 17,
+            job: 'Programmer'
+        }
+
+        localStorage.setItem('person', JSON.stringify(person))
+
+        // Salvar JSON em objeto
+
+        const getPerson = localStorage.getItem('person')
+        console.log(getPerson)
+        const personObjct = JSON.parse(getPerson)
+        console.log(typeof personObjct)
+
+        console.log(personObjct.job)
+
+    </script>
+</body>
+
+</html>
