@@ -79,7 +79,7 @@ numbers.shift() // Essa função faz tudo isso apresentado acima
 
 
 // Adicionando/removendo elementos de uma posição específica
-numbers.splice(5,3) // Remove 3 elementos apartir do índice 5
+numbers.splice(5, 3) // Remove 3 elementos apartir do índice 5
 numbers.splice(4, 0, 4, 5, 6) // Adiciona 4,5 e 6 apartir do índice 4
 // Syntax do método splice:
 // 1 argumento - Apartir de que índice queremos remover ou adicionar elementos
@@ -93,5 +93,32 @@ let avaregeTemp1 = [] // Matriz
 avaregeTemp1[0] = [72, 75, 79, 81, 81] // Linha 0
 avaregeTemp1[1] = [81, 79, 75, 75, 73, 73] // Linha 1
 // Cada linha é um dia e as colunas são as temp da cada hora dos dias (só um exemplo de aplicação)
+// Iterando com elas, podemos representar essa 'matriz'
+function printMatriz(myMatriz) {
+    for (let i = 0; i < myMatriz.length; i++) {
+        for (let j = 0; j < myMatriz[i].length; j++) {
+            console.log(myMatriz[i][j])
+        }
+    }
+}
+// Ou ultilizar o console.table, que tem uma representação mais elegante (e mesmo comportamento que a function printMatriz)
 
-
+// Arrays multidimensionais
+const matriz3x3x3 = []
+for (let i = 0; i < 3; i++) {
+    matriz3x3x3[i] = []
+    for (let j = 0; j < 3; j++) {
+        matriz3x3x3[i][j] = []
+        for (let z = 0; z < 3; z++) {
+            matriz3x3x3[i][j][z] = i + j + z
+        }
+    }
+} 
+// A representação seria em forma de cubo:
+// for (let i = 0; i < matriz3x3x3.length; i++) {
+//     for (let j = 0; j < matriz3x3x3[i].length; j++) {
+//         for (let z = 0; z < matriz3x3x3[i][j].length; z++) {
+//             console.log(matriz3x3x3[i][j][z])
+//         }
+//     }    
+// }
