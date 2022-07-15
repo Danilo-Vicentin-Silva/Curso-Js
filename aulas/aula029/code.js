@@ -113,7 +113,7 @@ for (let i = 0; i < 3; i++) {
             matriz3x3x3[i][j][z] = i + j + z
         }
     }
-} 
+}
 // A representação seria em forma de cubo:
 // for (let i = 0; i < matriz3x3x3.length; i++) {
 //     for (let j = 0; j < matriz3x3x3[i].length; j++) {
@@ -122,3 +122,36 @@ for (let i = 0; i < 3; i++) {
 //         }
 //     }    
 // }
+
+
+
+// Outros métodos de Arrays em JavaScript
+
+// Juntando Arrays
+const zero = 0
+const positiveNumbers = [1, 2, 3]
+const negativeNumbers = [-3, -2, -1]
+let numbers1 = negativeNumbers.concat(zero, positiveNumbers)
+
+// Iterando Arrays
+const numeroPar = x => x % 2 === 0 // Um laço também é usual na iteração de Arrays
+
+// Every => itera pela Array até ser devolvido 'false', usando a função passada como parâmetro
+numbers1.every(numeroPar)
+// Some => mesma coisa que Every, só que o oposto 'true'
+numbers1.some(numeroPar)
+// Verificação geral usando forEach
+numbers1.forEach(x => x % 2 === 0)
+
+// Map e Filter
+const myMap = numbers1.map(numeroPar) // Retorna um Array com os Bollemans resultado
+const filterNumbers = numbers1.filter(numeroPar) // Retorna os elemento que testaram 'true'
+
+// Reduce
+let numbers3 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+numbers3.reduce((previus, current) => previus + current) // Reduz a Array à um elemento, usando uma function passada como parâmetro
+// previousValue > currentValue, Index e array são os parãmetros (só os 2 primeiros são obrigatórios)
+
+// Join => converte TODOS os elementos em strings, se não for undefined ou null
+let myStrings = ['Oi',1,'','Hello']
+let newString = myStrings.join() // Parãmetro para especificar o separador entre os elementos string
