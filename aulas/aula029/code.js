@@ -155,3 +155,13 @@ numbers3.reduce((previus, current) => previus + current) // Reduz a Array à um 
 // Join => converte TODOS os elementos em strings, se não for undefined ou null
 let myStrings = ['Oi',1,'','Hello']
 let newString = myStrings.join() // Parãmetro para especificar o separador entre os elementos string
+
+// Sort => Organiza Array com function ou em ordem Unicode
+let listaChamada = ['Danilo', 'Alex', 'Carter', 'Barry', 1, 20, 1010]
+let novaLista = listaChamada.sort()
+
+// toString => retorna uma nova array em forma de string
+let myArray1 = [1, 'Olá', false, {}, 'teste']
+let newMyArray = myArray1.toString() // Armazena '1, Olá, false, {}, teste' em String
+
+// Slice => 
