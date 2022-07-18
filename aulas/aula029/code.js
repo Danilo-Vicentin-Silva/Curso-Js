@@ -164,4 +164,53 @@ let novaLista = listaChamada.sort()
 let myArray1 = [1, 'Olá', false, {}, 'teste']
 let newMyArray = myArray1.toString() // Armazena '1, Olá, false, {}, teste' em String
 
-// Slice => 
+// Slice => devolve um novo Array apartir do indice especificado
+let array1 = [0,1,2,3,4,5]
+let copiaArray = array1.slice(0,4) // Copia a array1 do indice[0]até o[4]
+
+// lastIndexOf => procura elementos com críterio de pesquisa (de traz pra frente)
+let array2 = [0,1,2,3,4]
+array2.lastIndexOf(3)
+
+// Reverse => inverte um array, fazendo o último item se tornar o primeiro e por aí vai
+let array3 = [5,4,3,2,1,0]
+array3.reverse()
+
+// Iterando com o laço for...of => itera sob todos os elementos da Array
+for (const n of numbers) {
+    n % 2 === 0? 'even' : 'odd'
+} // Retorna even para valores pares, e odd para impares
+
+// Iterator
+let iterator = numbers[Symbol.iterator]()
+for (const n of iterator) {
+    newN = []
+} // Obtém todos os valores do array percorrendo em um laço, aqui ele armazena em newN
+// Por baixo dos panos, isso ocorre:
+iterator.next().value
+iterator.next().value
+// Iterator executará next até receber 'undefined'
+
+// Entries => devolve iterator contendo o par chave-valor
+let aEntries = numbers.entries()
+for (const n of aEntries) {
+    //console.log(n) // Exibe no esquema [chave, valor]
+} // Por baixo dos panos:
+//console.log(aEntries.next().value) // Exibe [0, -1] (indice-valor)
+//console.log(aEntries.next().value) // Exibe [1, 1] (indice-valor)
+// Executa até receber undefined
+
+// Keys => devolve chaves obtidas do iterator
+const aKeys = numbers.keys() // Associa iterator Keys à constante
+for (const n of aKeys) {
+    //console.log(n) // Exibe as chaves em um laço. Executa até 'done' resutar e true
+} 
+// Mesmo comportamento de baixo dos panos
+
+// Values => devolve os valores obtidas pelo iterator
+const aValues = numbers.values()
+for (const n of aValues) {
+    //console.log(n) // Exibe apenas os valores
+}
+// Mesmo comportamento de baixo dos panos, também tem 'done? true : false'
+
