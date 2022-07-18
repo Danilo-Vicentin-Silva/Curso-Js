@@ -128,6 +128,7 @@ for (let i = 0; i < 3; i++) {
 // Outros métodos de Arrays em JavaScript
 
 // Juntando Arrays
+// Concat
 const zero = 0
 const positiveNumbers = [1, 2, 3]
 const negativeNumbers = [-3, -2, -1]
@@ -153,7 +154,7 @@ numbers3.reduce((previus, current) => previus + current) // Reduz a Array à um 
 // previousValue > currentValue, Index e array são os parãmetros (só os 2 primeiros são obrigatórios)
 
 // Join => converte TODOS os elementos em strings, se não for undefined ou null
-let myStrings = ['Oi',1,'','Hello']
+let myStrings = ['Oi', 1, '', 'Hello']
 let newString = myStrings.join() // Parãmetro para especificar o separador entre os elementos string
 
 // Sort => Organiza Array com function ou em ordem Unicode
@@ -165,20 +166,20 @@ let myArray1 = [1, 'Olá', false, {}, 'teste']
 let newMyArray = myArray1.toString() // Armazena '1, Olá, false, {}, teste' em String
 
 // Slice => devolve um novo Array apartir do indice especificado
-let array1 = [0,1,2,3,4,5]
-let copiaArray = array1.slice(0,4) // Copia a array1 do indice[0]até o[4]
+let array1 = [0, 1, 2, 3, 4, 5]
+let copiaArray = array1.slice(0, 4) // Copia a array1 do indice[0]até o[4]
 
 // lastIndexOf => procura elementos com críterio de pesquisa (de traz pra frente)
-let array2 = [0,1,2,3,4]
+let array2 = [0, 1, 2, 3, 4]
 array2.lastIndexOf(3)
 
 // Reverse => inverte um array, fazendo o último item se tornar o primeiro e por aí vai
-let array3 = [5,4,3,2,1,0]
+let array3 = [5, 4, 3, 2, 1, 0]
 array3.reverse()
 
 // Iterando com o laço for...of => itera sob todos os elementos da Array
 for (const n of numbers) {
-    n % 2 === 0? 'even' : 'odd'
+    n % 2 === 0 ? 'even' : 'odd'
 } // Retorna even para valores pares, e odd para impares
 
 // Iterator
@@ -204,7 +205,7 @@ for (const n of aEntries) {
 const aKeys = numbers.keys() // Associa iterator Keys à constante
 for (const n of aKeys) {
     //console.log(n) // Exibe as chaves em um laço. Executa até 'done' resutar e true
-} 
+}
 // Mesmo comportamento de baixo dos panos
 
 // Values => devolve os valores obtidas pelo iterator
@@ -214,3 +215,42 @@ for (const n of aValues) {
 }
 // Mesmo comportamento de baixo dos panos, também tem 'done? true : false'
 
+// From => cria outro Array apartir de uma já existente
+let numbers2 = Array.from(numbers) // Criando outro sem condição
+let evens = Array.from(numbers, x => (x % 2 == 0)) // Criando outra com condição 
+
+// Of => cria outra Array apartir dos argumentos
+let numbers4 = Array.of(1, 2, 3) // Cria a Array [1,2,3]
+let numbersCopy = Array.of(...numbers4) // Copia um array apartir de operador de espalhamento (...)
+
+// Fill => preenche Array com um valor em posições específicas
+let numbersCopy0 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+numbersCopy0.fill(0, 2, 5) // Preenche de 0 do index 2 até o 5
+let ones = Array(6).fill(1) // Cria uma nova Array apenas com o valor 1 (lenght = 6)
+
+// CopyWithin => copia sequência de valores para posição início
+let copyArray = [1, 2, 3, 4, 5, 6]
+copyArray.copyWithin(0, 3) // Resulta em [4,5,6,4,5,6]
+copyArray.copyWithin(1, 3, 4) // Copia o 4,5,6 e cola apartir do index 1
+
+
+// Ordenação e pesquisa
+// Para algoritmos de organização e pesquisa, é importante saber usar bem os métodos estudados acima 
+// Com eles podemos criar um algoritimo de ordenação bem eficiente ultilizando Arrays
+
+// Ordenando elementos
+
+let numbers5 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+numbers5.reverse() // Bagunçando a ordem (revertendo-a)
+numbers5.sort((a,b) => a -b) // Para organizar em ordem crescente
+// Por baixo dos panos, esse sort funciona assim:
+function compare(a,b) {
+    if (a < b) {
+        return -1
+    }
+    if (a > b) {
+        return 1
+    }
+    return 0
+}
+numbers5.sort(compare) //  ou numbers5.sort((a,b) => a -b)
