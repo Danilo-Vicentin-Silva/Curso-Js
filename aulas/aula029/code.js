@@ -242,9 +242,9 @@ copyArray.copyWithin(1, 3, 4) // Copia o 4,5,6 e cola apartir do index 1
 
 let numbers5 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 numbers5.reverse() // Bagunçando a ordem (revertendo-a)
-numbers5.sort((a,b) => a -b) // Para organizar em ordem crescente
+numbers5.sort((a, b) => a - b) // Para organizar em ordem crescente
 // Por baixo dos panos, esse sort funciona assim:
-function compare(a,b) {
+function compare(a, b) {
     if (a < b) {
         return -1
     }
@@ -254,3 +254,68 @@ function compare(a,b) {
     return 0
 }
 numbers5.sort(compare) //  ou numbers5.sort((a,b) => a -b)
+
+// Ordenação personalizada
+// Por exemplo, organizando um array de objetos Person pela idade
+
+const friends = [{
+        name: 'John',
+        age: 30
+    },
+    {
+        name: 'Ana',
+        age: 20
+    },
+    {
+        name: 'Chris',
+        age: 25
+    }
+]
+
+function comparePerson(a, b) {
+    if (a.age < b.age) {
+        return -1
+    }
+    if (a.age > b.age) {
+        return 1
+    }
+    return 0 // Se a == b
+}
+
+//console.log(friends.sort(comparePerson)) // Organiza os objetos em ordem cresente de idade
+
+// Ordenando Strings
+let names = ['Ana', 'ana', 'john', 'John']
+names.sort((a, b) => a.localeCompare(b)) // Retorna ["ana","Ana","john","john"]
+const names2 = ['Maève', 'Maeve']
+names2.sort((a, b) => a.localeCompare(b)) // Também organiza com caracteres com acento
+
+// Pesquisa => a seguir alguns métodos para algoritimos de pesquisa
+let numbers6 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] // Array que será usada
+// 1-
+
+numbers.indexOf(10) // Retorna o índice do 1º que achar o valor 10
+numbers.lastIndexOf(100) // Retorna -1 pois o valor 100 não existe no array Numbers
+
+// 2-
+
+function multiplo13(element, index, array) {
+    return (element % 13 == 0)
+}
+numbers6.find(multiplo13) // Retorna o 1º valor que corresponde o critério da pesquisa
+numbers6.findIndex(multiplo13) // Retorna o 1º indice que corresponde ao critério da pesquis
+// Se nada for encontrado, ambos retornam undefined
+
+// 3- 
+
+numbers6.includes(15) // Devolve true
+numbers6.includes(20) // Devolve false
+let numbers7 = [7, 6, 5, 4, 3, 2, 1]
+numbers7.includes(4, 5) // Devolve false, pois não existe o nº4 após o index 5
+
+// 4- Existem muitos outros algoritmos possíveis para pesquisa...
+
+
+// Classe TypedArray
+
+const int16 = Int16Array(); // Só considerações finais, anotação mental
