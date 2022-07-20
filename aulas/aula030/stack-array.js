@@ -12,6 +12,9 @@ class Stack {
     pop() {
         return this.items.pop()
     }
+    isEmpyt() {
+        return this.items.lenght === 0
+    }
     peek() {
         return this.items[this.items.length - 1]
     }
