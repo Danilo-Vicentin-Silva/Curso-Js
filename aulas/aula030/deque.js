@@ -175,5 +175,3 @@ function palindromeChecker(aString) {
     }
     return isEqual
 }
-
-
