@@ -14,6 +14,16 @@ class LinkedList {
         this.head = null
         this.equalsFn = equalsFn
     }
+    getElementByIndex(index) {
+        if (index >= 0 && index <= this.count) {
+            let current = this.head
+            for (let i = 0; index && current != null; i++) {
+                current = current.next
+            }
+            return current
+        }
+        return undefined
+    }
     push(element) {
         const node = new Node(element)
         let current
@@ -28,6 +38,22 @@ class LinkedList {
         }
         this.count++
     }
+    removeAt(index) {
+        if (index => 0 && index < this.count) {
+            let current = this.head
+            if (index === 0) {
+                this.head = current.next
+            } else {
+                const previous = this.getElementByIndex
+                current = previous.next
+                previous.next = current.next
+            }
+            previous.next = current.next
+            this.count--
+            return current.element
+        }
+        return undefined
+    }
 }
 
 class Node { // Classe auxiliar para representacao de elementos
@@ -36,5 +62,3 @@ class Node { // Classe auxiliar para representacao de elementos
         this.next = undefined
     }
 }
-
-
