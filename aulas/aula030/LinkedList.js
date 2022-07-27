@@ -10,9 +10,10 @@ class LinkedList {
 		this.head = null
 		this.equalsFn = equalsFn
 	}
-    defaultEquals(a, b) { // Verifica se dois elementos são idênticos
-        return a === b
-    }
+	defaultEquals(a, b) {
+		// Verifica se dois elementos são idênticos
+		return a === b
+	}
 	getElementByIndex(index) {
 		if (index >= 0 && index <= this.count) {
 			let current = this.head
@@ -40,6 +41,10 @@ class LinkedList {
 			current.next = node // Adicionar novo elemento a final com seu next == undefined
 		}
 		this.count++
+	}
+	remove(element) {
+		const index = this.indexOfElement(element)
+		return this.removeAt(index)
 	}
 	insertInIndex(element, index) {
 		if (index >= 0 && index <= this.count) {
@@ -74,6 +79,37 @@ class LinkedList {
 			return current.element
 		}
 		return undefined
+	}
+	indexOfElement(element) {
+		let current = this.head
+		for (let i = 0; i < this.count && current != null; i++) {
+			if (this.defaultEquals(element, current.element)) {
+				return i
+			}
+			current = current.next
+		}
+		return -1
+	}
+	size () {
+		return this.count
+	}
+	isEmpty () {
+		return this.size() === 0
+	}
+	getHead () {
+		return this.head
+	}
+	toString () {
+		if (this.isEmpty()) {
+			return ''
+		}
+		let objString = `${this.head.element}`
+		let current = this.head.next
+		for (let i = 1; i < this.size() && current != null; i++) {
+			objString = `${objString},${current.element}`
+			current = current.next
+		}
+		return objString
 	}
 }
 
