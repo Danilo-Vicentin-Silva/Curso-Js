@@ -90,18 +90,18 @@ class LinkedList {
 		}
 		return -1
 	}
-	size () {
+	size() {
 		return this.count
 	}
-	isEmpty () {
+	isEmpty() {
 		return this.size() === 0
 	}
-	getHead () {
+	getHead() {
 		return this.head
 	}
-	toString () {
+	toString() {
 		if (this.isEmpty()) {
-			return ''
+			return ""
 		}
 		let objString = `${this.head.element}`
 		let current = this.head.next
@@ -118,5 +118,56 @@ class Node {
 	constructor(element) {
 		this.element = element
 		this.next = undefined
+	}
+}
+
+// DoubleLinkedList
+// São listas duplamente ligadas pois além de termos uma referência ao próximo Node, teremos também para o anterior
+// isso difere estas listas. As iterações podem ocorrrer tanto de trás para frente como vise-versa.
+// Uma das vantagens é que podemos extender a classe dela das 'normals' LinkedLists
+
+class DoublyNode extends Node {
+	constructor(element, next, prev) {
+		super(element, next)
+		this.prev = prev
+	}
+}
+
+class DoublyLinkedList extends LinkedList {
+	constructor(equalsFn = defaultEquals) {
+		super(equalsFn)
+		this.tail = tail
+	}
+
+	insert(element, index) {
+		if (index >= 0 && index <= this.count) {
+			const node = new DoublyNode(element)
+			let current = this.head
+			if (index === 0) { // Se o index que passamos for 0, quer dizer que aloraremos ele no head
+				if (this.head == null) { // Se Head estiver vazio, apenas definimos o valor e definimos ele como o útlimo também
+					this.head = node
+					this.tail = node
+				} else { // 'Empurramos' o element head atual, e definimos o element que passamos como parâmetro ao head
+					node.next = this.head
+					current.prev = node
+					this.head = node
+				}
+			} else if (index === this.count) { // Se formos alocar no tail, devemos fazer todas as ligações para alocar ele depois do último
+				current = this.tail
+				current.next = node
+				node.prev = current
+				this.tail = node
+			} else { // Caso for no meio, devemos fazer com cuidado todas as ligações novamente depois de alocar entre dois elementos
+				const previous = this.getElementByIndex(index - 1)
+				current = previous.next
+				node.next = current
+				previous.next = node
+				current.prev = node
+				node.prev = previous
+			}
+			this.count++
+			return true
+		}
+		return false
 	}
 }
