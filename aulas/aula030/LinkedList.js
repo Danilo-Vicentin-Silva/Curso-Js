@@ -134,30 +134,35 @@ class DoublyNode extends Node {
 }
 
 class DoublyLinkedList extends LinkedList {
-	constructor(equalsFn = defaultEquals) {
-		super(equalsFn)
-		this.tail = tail
+	constructor(defaultEquals) {
+		super(defaultEquals)
+		this.tail = undefined
 	}
 
 	insert(element, index) {
 		if (index >= 0 && index <= this.count) {
 			const node = new DoublyNode(element)
 			let current = this.head
-			if (index === 0) { // Se o index que passamos for 0, quer dizer que aloraremos ele no head
-				if (this.head == null) { // Se Head estiver vazio, apenas definimos o valor e definimos ele como o útlimo também
+			if (index === 0) {
+				// Se o index que passamos for 0, quer dizer que aloraremos ele no head
+				if (this.head == null) {
+					// Se Head estiver vazio, apenas definimos o valor e definimos ele como o útlimo também
 					this.head = node
 					this.tail = node
-				} else { // 'Empurramos' o element head atual, e definimos o element que passamos como parâmetro ao head
+				} else {
+					// 'Empurramos' o element head atual, e definimos o element que passamos como parâmetro ao head
 					node.next = this.head
 					current.prev = node
 					this.head = node
 				}
-			} else if (index === this.count) { // Se formos alocar no tail, devemos fazer todas as ligações para alocar ele depois do último
+			} else if (index === this.count) {
+				// Se formos alocar no tail, devemos fazer todas as ligações para alocar ele depois do último
 				current = this.tail
 				current.next = node
 				node.prev = current
 				this.tail = node
-			} else { // Caso for no meio, devemos fazer com cuidado todas as ligações novamente depois de alocar entre dois elementos
+			} else {
+				// Caso for no meio, devemos fazer com cuidado todas as ligações novamente depois de alocar entre dois elementos
 				const previous = this.getElementByIndex(index - 1)
 				current = previous.next
 				node.next = current
@@ -169,5 +174,37 @@ class DoublyLinkedList extends LinkedList {
 			return true
 		}
 		return false
+	}
+
+	remove(index) {
+		// Para remover elementos, só devemos refazer as ligações de modo que 'esqueçam' do element removido
+		if (index >= 0 && index < this.count) {
+			// Verificar se index é valido
+			let current = this.head
+			if (index === 0) {
+				// Se queremos remover no 1º index
+				this.head = current.next
+				if (this.count === 1) {
+					// Se houver apenas um elemento, apenas removemos o valor de tail
+					this.tail = undefined
+				} else {
+					this.head.prev = undefined
+				}
+			} else if (index === this.count - 1) {
+				// Se for o último elemento
+				current = this.tail
+				this.tail = current.prev
+				this.tail.next = undefined
+			} else {
+				// Se for em qualquer outra posição
+				current = this.getElementByIndex(index)
+				const previous = current.prev
+				previous.next = current.next
+				current.next.prev = previous
+			}
+			this.count++
+			return current.element
+		}
+		return undefined
 	}
 }
