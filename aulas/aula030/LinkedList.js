@@ -208,3 +208,66 @@ class DoublyLinkedList extends LinkedList {
 		return undefined
 	}
 }
+
+// CircularLinkedList
+// São listas circulares que podem ser duplas o não, em que o último elemento refencia o primeiro
+// E na duplamente circular o primeiro elemento referencia o anterior como o último
+
+class CircularLinkedList extends LinkedList {
+	constructor(defaultEquals) {
+		super(defaultEquals)
+	}
+	insert(element, index) {
+		if (index >= 0 && index <= this.count) {
+			// Verifica se posição é válida
+			const node = new Node(element)
+			let current = this.head
+			if (index === 0) {
+				// Se for na primeira posição, basta dar o valor e adicionar ele mesmo como referencia
+				if (this.head == null) {
+					this.head = node
+					node.next = this.head
+				} else {
+					// Se não estiver vazio (head), basta iterar os elementos pela lista até a útlima posição
+					node.next = current
+					current = this.getElementByIndex(this.size())
+					this.head = node // Adiciona o valor passado à head
+					current.next = this.head // Isso adicionar head como next do útimo elemento
+				}
+			} else {
+				const previous = this.getElementByIndex(index - 1)
+				node.next = previous.next = node
+			}
+			this.count++
+			return true
+		}
+		return false
+	}
+	remove(index) {
+		if (index >= 0 && index < this.count) {
+			// Verifica se valor é valido
+			let current = this.head
+			if (index == 0) {
+				// Se não houver nenhum element, basta remover toda a lista em si
+				if (this.size() === 1) {
+					this.head = undefined
+				} else {
+					// Se não, armazenar o valor removido depois de procurá-lo, emfim refazer as ligações
+					const removed = this.head
+					current = this.getElementByIndex(this.size())
+					this.head = this.head.next
+					current.next = this.head
+					current = removed
+				}
+			} else {
+				// Em qualquer outro lugar na lista, basta fazer as ligações afim de remover o element requerido no fim
+				const previous = this.getElementByIndex(index - 1)
+				current = previous.next
+				previous.next = current.next
+			}
+			this.count++
+			return current.element
+		}
+		return undefined
+	}
+}
