@@ -271,3 +271,84 @@ class CircularLinkedList extends LinkedList {
 		return undefined
 	}
 }
+
+// SortedLinkedLists
+// São listas que possuem um comportamento de ordenação automática em seus elementos
+
+const Compare = {
+	LESS_THAN: -1,
+	BIGGER_THAN: 1
+}
+function defaultCompare(a,b) {
+	if (a === b) {
+		return 0
+	}
+	return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN
+}
+class SortedLinkedList extends LinkedList {
+	constructor(defaultEquals) {
+		super(defaultEquals)
+		this.compareFn = compareFn
+	}
+	insert(element, index = 0) {
+		// Se a lista estiver vazia, basta reutilizar o método insert anterior para o element passado
+		if (this.isEmpty()) {
+			return super.insert(element, 0)
+		}
+		// Caso o contrário, usar o método de inserimento especial dessa classe
+		const pos = this.getIndexNextSortedElement(element)
+		return super.insert(element, pos)
+	}
+	getIndexNextSortedElement(element) {
+		let current = this.head
+		let i = 0
+		for (; i < this.size() && current; i++) {
+			// Iteramos pela lista até achar uma posição correta de acordo com o nº do element
+			const comp = this.compareFn(element, current.element)
+			if (comp === Compare.LESS_THAN) {
+				return i
+			}
+			current = current.next
+		}
+		return i
+	}
+	
+}
+
+// StackLinkedList
+// São stacks que ultilizam-se da lógica da DoublyLinkedList para implementação, podendo reaproveitar os métodos
+// É possível fazer isso com queues, dequeues, listas e a própria Stack
+
+
+class StackLinkedList {
+	constructor() {
+		this.items = new DoublyLinkedList()
+	}
+	push(element) {
+		this.items.push(element)
+	}
+	pop() {
+		if (this.isEmpty()) {
+			return undefined
+		}
+		return this.items.removeAt(this.size() - 1)
+	}
+	peek() {
+		if (this.isEmpty()) {
+			return undefined
+		}
+		return this.items.getElementByIndex(this.size() -1).element
+	}
+	isEmpty() {
+		return this.items.isEmpty()
+	}
+	size() {
+		return this.items.size()
+	}
+	clear() {
+		this.items.clear()
+	}
+	toString() {
+		return this.items.toString()
+	}
+}
