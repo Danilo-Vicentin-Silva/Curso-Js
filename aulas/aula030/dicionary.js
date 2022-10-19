@@ -46,4 +46,42 @@ class Dicionary {
     hasKey(key) {
         return this.table[this.toStrFn(key)] != null
     }
+    key() {
+        return this.keyValues().map(ValuePair => ValuePair.key)
+    }
+    keyValues() {
+        return Object.values(this.table)
+    }
+    values() {
+        return this.keyValues().map(ValuePair => ValuePair.value)
+    }
+    forEach(callbackFn) {
+        const ValuePairs = this.keyValues()
+        for (let i = 0; i < ValuePairs.length; i++) {
+            const result = callbackFn(ValuePairs[i].key, ValuePairs[i].value)
+            if (result === false) {
+                break
+            }
+        }
+    }
+    size() {
+        return Object.keys(this.table).length
+    }
+    isEmpty() {
+        return this.size() === 0
+    }
+    clear() {
+        this.table = {}
+    }
+    toString() {
+        if (this.isEmpty()) {
+            return ''
+        }
+        const valuePairs = this.keyValues()
+        let objString = `${valuePairs[0].toString()}`
+        for (let i = 1; i < valuePairs.length; i++) {
+            objString = `${objString}, ${valuePairs[i].toString()}`
+        }
+        return objString
+    }
 }
