@@ -92,4 +92,4 @@ set2.add(2)
 
 const set3 = set1.isSubSet(set2)
 
-console.table(set3)+
+console.table(set3)
