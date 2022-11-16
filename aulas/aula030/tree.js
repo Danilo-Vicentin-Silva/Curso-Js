@@ -141,18 +141,221 @@ class BinarySearchTree {
 	}
 }
 
-const tree = new BinarySearchTree()
-tree.insert(11)
-tree.insert(102)
-tree.insert(200)
-tree.insert(100)
-tree.insert(43)
-tree.insert(132)
-tree.insert(32)
-tree.insert(5)
-tree.insert(8)
-tree.insert(9)
-tree.insert(10)
+//Outra árvore, esta, mais balanceada
+const BalanceFactor = {
+	UNBALANCED_RIGHT: 1,
+	SLIGHTLY_UNBALANCED_RIGHT: 2,
+	BALANCED: 3,
+	SLIGHTLY_UNBALANCED_LEFT: 4,
+	UNBALANCED_LEFT: 5,
+}
 
-console.log(tree.search(100) ? "Key 100 found." : "Key 100 not found")
-console.log(tree.search(7) ? "Key 7 found." : "Key 7 not found")
+class AVLTree extends BinarySearchTree {
+	constructor(compareFn = defaultCompare) {
+		super(compareFn)
+		this.compareFn = compareFn
+		this.root = null
+	}
+	getNodeHeight(node) {
+		if (node === null) {
+			return -1
+		}
+		return (
+			Math.max(this.getNodeHeight(node.left), this.getNodeHeight(node.right)) +
+			1
+		)
+	}
+	getBalanceFactor(node) {
+		const heightDifference =
+			this.getNodeHeight(node.left) - this.getNodeHeight(node.right)
+		switch (heightDifference) {
+			case -2:
+				return BalanceFactor.UNBALANCED_RIGHT
+			case -1:
+				return BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT
+			case 1:
+				return BalanceFactor.SLIGHTLY_UNBALANCED_LEFT
+			case 2:
+				return BalanceFactor.UNBALANCED_LEFT
+			default:
+				return BalanceFactor.BALANCED
+		}
+	}
+	rotationLL(node) {
+		const tmp = node.left
+		node.left = tmp.right
+		tmp.right = node
+		return tmp
+	}
+	rotationRR(node) {
+		const tmp = node.right
+		node.right = tmp.left
+		tmp.left = node
+		return tmp
+	}
+	rotationLR(node) {
+		node.left = this.rotationRR(node.left)
+		return this.rotationLL(node)
+	}
+	rotationRL(node) {
+		node.right = this.rotationLL(node.right)
+		return this.rotationRR(node)
+	}
+	insert(key) {
+		this.root = this.insertNode(this.root, key)
+	}
+	insertNode(node, key) {
+		if (node == null) {
+			return new Node(key)
+		} else if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+			node.left = this.insertNode(node.left, key)
+		} else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
+			node.right = this.insertNode(node.right, key)
+		} else {
+			return node
+		}
+		const BalanceFactor = this.getBalanceFactor(node)
+		if (BalanceFactor === BalanceFactor.UNBALANCED_LEFT) {
+			if (this.compareFn(key, node.left.key) === Compare.LESS_THAN) {
+				node = this.rotationLL(node)
+			} else {
+				return this.rotationLR(node)
+			}
+		}
+		if (BalanceFactor === BalanceFactor.UNBALANCED_RIGHT) {
+			if (this.compareFn(key, node.right.key) === Compare.BIGGER_THAN) {
+				node = this.rotationRR(node)
+			} else {
+				return this.rotationRL(node)
+			}
+		}
+		return node
+	}
+	removeNode(node, key) {
+		node = super.removeNode(node, key)
+		if (node == null) {
+			return node
+		}
+		const BalanceFactor = this.getBalanceFactor(node)
+		if (BalanceFactor === BalanceFactor.UNBALANCED_LEFT) {
+			const BalanceFactorLeft = this.getBalanceFactor(node.left)
+			if (
+				BalanceFactorLeft === BalanceFactor.BALANCED ||
+				BalanceFactorLeft === BalanceFactor.SLIGHTLY_UNBALANCED_LEFT
+			) {
+				return this.rotationLL(node)
+			}
+			if (BalanceFactorLeft === BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT) {
+				return this.rotationLR(node.left)
+			}
+		}
+		if (BalanceFactor === BalanceFactor.UNBALANCED_RIGHT) {
+			const BalanceFactorRight = this.getBalanceFactor(node.right)
+			if (
+				BalanceFactorRight === BalanceFactor.BALANCED ||
+				BalanceFactorRight === BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT
+			) {
+				return this.rotationRR(node)
+			}
+			if (BalanceFactorRight === BalanceFactor.SLIGHTLY_UNBALANCED_LEFT) {
+				return this.rotationRL(node.right)
+			}
+		}
+		return node
+	}
+}
+/* Árvore Rubro-Negra (implementação avançado/Typescript)
+class RedBlackTree extends BinarySearchTree {
+	constructor(compareFn) {
+		super(compareFn)
+		this.compareFn = compareFn
+		this.root = null
+	}
+	insert(key: T) {
+		if (this.root == null) {
+			this.root = new RedBlackTree(key)
+			this.root.color = Colors.BLACK
+		} else {
+			const newNode = this.insertNode(this.root, key)
+			this.fixTreeProperties(newNode)
+		}
+	}
+	insertNode(node, key) {
+		if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+			if (node.left == null) {
+				node.left = new RedBlackNode(key)
+				node.left.parent = node
+				return node.left
+			} else {
+				return this.insertNode(node.left, key)
+			}
+		} else if (node.right == null) {
+			node.right = new RedBlackNode(key)
+			node.right.parent = node
+			return node.right
+		}
+		else {
+			return this.insertNode(node.right, key)
+		}
+	}
+	fixTreeProperties(node) {
+		while (node && node.parent && node.parent.color.isRed() && node.color !== Color.BLACK) {
+			let parent = node.parent
+			const grandParent = parent.parent
+			if (grandParent && grandParent.left === parent) {
+				const uncle = grandParent.right
+				if (uncle && uncle.color === Color.RED) {
+					grandParent.color = Colors.RED
+					parent.color = Colors.BLACK
+					uncle.color = Color.BLACK
+					node = grandParent
+				}
+				else {
+					if (node === parent.right) {
+						this.rotationRR(parent)
+						node = parent
+						parent = node.parent
+					}
+					this.rotationLL(grandParent)
+					parent.color = Colors.BLACK
+					grandParent.color = Colors.RED
+					node = parent
+				}
+			}
+			else {
+				const uncle = grandParent.left
+				if (uncle && uncle.color === Colors.RED) {
+					grandParent.color = Colors.RED
+					parent.color = Color.BLACK
+					uncle.color = Colors.BLACK
+					node = grandParent
+				}
+				else {
+					if (node === parent.left) {
+						this.rotationLL(parent)
+						node = parent
+						parent = node.parent
+					}
+					this.rotationRR(grandParent)
+					parent.color = Colors.BLACK
+					grandParent.color = Colors.RED
+					node = parent
+				}
+			}
+		}
+		this.root.color = Colors.BLACK
+	}
+}
+
+class RedBlackNode extends Node {
+	constructor(key) {
+		super(key)
+		this.key = key
+		this.color = Colors.RED
+		this.parent = null
+	}
+	isRed() {
+		return this.color === Color.RED
+	}
+}
+*/
