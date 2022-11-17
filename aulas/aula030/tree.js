@@ -119,7 +119,7 @@ class BinarySearchTree {
 			node.left = this.removeNode(node.left, key)
 			return node
 		} else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
-			node.right = this.removeNode(node, node.right)
+			node.right = this.removeNode(node.right, key)
 			return node
 		} else {
 			if (node.left == null && node.right == null) {
@@ -140,6 +140,10 @@ class BinarySearchTree {
 		}
 	}
 }
+
+const tree = new BinarySearchTree()
+tree.insert(20)
+console.log(tree)
 
 //Outra árvore, esta, mais balanceada
 const BalanceFactor = {
