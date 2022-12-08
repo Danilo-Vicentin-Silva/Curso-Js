@@ -91,3 +91,31 @@ class MinHeap {
         } 
     }
 }
+
+function reverseCompare(CompareFn) {
+    return (a,b) => CompareFn(b,a)
+}
+
+class MaxHeap extends MinHeap {
+    constructor(CompareFn = defaultCompare) { 
+        super(CompareFn)
+        this.CompareFn = reverseCompare(CompareFn)
+    }
+}
+
+function heapSort(array, CompareFn = defaultCompare) {
+    let heapSize = array.length
+    buildMaxHeap(array, CompareFn)
+    while (heapSize > 1) {
+        swap(array, 0, --heapSize)
+        heapify(array, 0, heapSize, CompareFn)
+    }
+    return array
+}
+
+function buildMaxHeap(array, CompareFn) {
+    for (let i = Math.floor(array.length / 2); i >= 0; i -= 1) {
+        heapify(array, i, array.length, CompareFn)
+    }
+    return array
+}
