@@ -45,12 +45,3 @@ class Queue {
         return objString
     }
 }
-
-const queue = new Queue()
-queue.enqueue('Danilo')
-queue.enqueue('Daniel')
-queue.enqueue('Simone')
-//console.log(queue.size()) // Exibe 3 pois adicionamos 3 elementos, a fila está assim: {count: 3, lowestCount: 0, items: {0:'Danilo,1:'Daniel'...}}
-queue.dequeue()
-queue.dequeue()
-//console.log(queue.size()) // Exibe 1 por que retiramos os elementos
