@@ -86,51 +86,51 @@ class Dicionary {
 	}
 }
 class Queue {
-    constructor() {
-        this.count = 0
-        this.lowestCount = 0
-        this.items = {}
-    }
-    enqueue(element) {
-        this.items[this.count] = element
-        this.count++
-    }
-    dequeue() {
-        if (this.isEmpty()) {
-            return undefined
-        }
-        const result = this.items[this.lowestCount]
-        delete this.items[this.lowestCount]
-        this.lowestCount++
-        return result
-    }
-    peek() {
-        if (this.isEmpty()) {
-            return undefined
-        }
-        return this.items[this.lowestCount]
-    }
-    isEmpty() {
-        return this.size() === 0
-    }
-    size() {
-        return this.count - this.lowestCount
-    }
-    clear() {
-        this.items = {}
-        this.count = 0
-        this.lowestCount = 0
-    }
-    toString() {
-        if (this.isEmpty()) {
-            return ''
-        }
-        let objString = `${this.items[this.lowestCount]}`
-        for (let i = this.lowestCount + 1; i < this.count; i++) {
-            objString = `${objString},${this.items[i]}`
-        }
-        return objString
-    }
+	constructor() {
+		this.count = 0
+		this.lowestCount = 0
+		this.items = {}
+	}
+	enqueue(element) {
+		this.items[this.count] = element
+		this.count++
+	}
+	dequeue() {
+		if (this.isEmpty()) {
+			return undefined
+		}
+		const result = this.items[this.lowestCount]
+		delete this.items[this.lowestCount]
+		this.lowestCount++
+		return result
+	}
+	peek() {
+		if (this.isEmpty()) {
+			return undefined
+		}
+		return this.items[this.lowestCount]
+	}
+	isEmpty() {
+		return this.size() === 0
+	}
+	size() {
+		return this.count - this.lowestCount
+	}
+	clear() {
+		this.items = {}
+		this.count = 0
+		this.lowestCount = 0
+	}
+	toString() {
+		if (this.isEmpty()) {
+			return ""
+		}
+		let objString = `${this.items[this.lowestCount]}`
+		for (let i = this.lowestCount + 1; i < this.count; i++) {
+			objString = `${objString},${this.items[i]}`
+		}
+		return objString
+	}
 }
 //
 
@@ -185,18 +185,19 @@ const Colors = {
 	BLACK: 2,
 }
 
-const initializeColor = vertices => {
-    const color = {}
-    for (let i = 0; i < vertices.length; i++) {
-        color[vertices[i]] = Colors.WHITE
-    }
-    return color
+const initializeColor = (vertices) => {
+	const color = {}
+	for (let i = 0; i < vertices.length; i++) {
+		color[vertices[i]] = Colors.WHITE
+	}
+	return color
 }
 
+//BFS
 const breadthFirstSearch = (graph, startVertex, callback) => {
-    const vertices = graph.getVertices()
-    const adjList = graph.getAdjlist()
-    const color = initializeColor(vertices)
+	const vertices = graph.getVertices()
+	const adjList = graph.getAdjlist()
+	const color = initializeColor(vertices)
 	const queue = new Queue()
 	queue.enqueue(startVertex)
 	while (!queue.isEmpty()) {
@@ -217,16 +218,100 @@ const breadthFirstSearch = (graph, startVertex, callback) => {
 	}
 }
 
-const graph = new Graph()
-const myVertices = ['A', 'B', 'C', 'D', 'E']
-for (let i = 0; i < myVertices.length; i++) {	
-	graph.addVertex(myVertices[i])	
-}
-graph.addEdge('A', 'B')
-graph.addEdge('A', 'C')
-graph.addEdge('A', 'D')
-graph.addEdge('C', 'D')
+// DFS
 
-const printVertex = (value) => console.log('Visited vertex: ' + value)
-breadthFirstSearch(graph, myVertices[0], printVertex)
- 
+const dephFirstSearch = (graph, callback) => {
+	const vertices = graph.getVertices()
+	const adjList = graph.getAdjlist()
+	const color = initializeColor(vertices)
+	for (let i = 0; i < vertices.length; i++) {
+		if (color[vertices[i]] === Colors.WHITE) {
+			dephFirstSearchVisit(vertices[i], color, adjList, callback)
+		}
+	}
+}
+const dephFirstSearchVisit = (u, color, adjList, callback) => {
+	color[u] = Colors.GREY
+	if (callback) {
+		callback(u)
+	}
+	const neighbors = adjList.get(u)
+	for (let i = 0; i < neighbors.length; i++) {
+		const w = neighbors[i]
+		if (color[w] === Colors.WHITE) {
+			dephFirstSearchVisit(w, color, adjList, callback)
+		}
+	}
+	color[u] = Colors.BLACK
+}
+
+// Algotimos com Graph
+
+//
+const INF = Number.MAX_SAFE_INTEGER
+const dijkstra = (graph, src) => {
+	const dist = []
+	const visited = []
+	const { length } = graph
+	for (let i = 0; i < length; i++) {
+		dist[i] = INF
+		visited[i] = false
+	}
+	dist[src] = 0
+	for (let i = 0; i < length - 1; i++) {
+		const u = minDistance(dist, visited)
+		visited[u]
+		for (let v = 0; v < length; v++) {
+			if (
+				!visited[v] &&
+				graph[u][v] !== 0 &&
+				dist[u] !== INF &&
+				dist[u] + graph[u][v] < dist[v]
+			) {
+				dist[v] = dist[u] + graph[u][v]
+			}
+		}
+		return dist
+	}
+}
+const minDistance = (dist, visited) => {
+	let min = INF
+	let minIndex = -1
+	for (let v = 0; v < dist.length; v++) {
+		if (visited[v] === false && dist[v] <= min) {
+			min = dist[v]
+			minIndex
+		}
+	}
+	return minIndex
+}
+//
+
+//
+const floydWarshall = (graph) => {
+	const dist = []
+	const { length } = graph
+	for (let i = 0; i < length; i++) {
+		dist[i] = []
+		for (let j = 0; j < length; j++) {
+			if (i === j) {
+				dist[i][j] = 0
+			} else if (!isFinite(graph[i][j])) {
+				dist[i][j] = Infinity
+			} else {
+				dist[i][j] = graph[i][j]
+			}
+		}
+	}
+	for (let k = 0; k < length; k++) {
+		for (let i = 0; i < length; i++) {
+			for (let j = 0; j < length; j++) {
+				if (dist[i][j] + dist[k][j] < dist[i][j]) {
+					dist[i][j] = dist[i][k] + dist[k][j]
+				}
+			}
+		}
+	}
+	return dist
+}
+//
