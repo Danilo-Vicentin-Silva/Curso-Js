@@ -18,7 +18,7 @@ function swap(array, a, b) {
 function bubbleSort(array, compareFn = defaultCompare) {
 	const { length } = array
 	for (let i = 0; i < length; i++) {
-		for (let j = 0; j < length - 1 ; j++) {
+		for (let j = 0; j < length - 1; j++) {
 			if (compareFn(array[j], array[j + 1]) === Compare.BIGGER_THAN) {
 				swap(array, j, j + 1)
 			}
@@ -30,7 +30,7 @@ function bubbleSort(array, compareFn = defaultCompare) {
 function modifiedBubbleSort(array, compareFn = defaultCompare) {
 	const { length } = array
 	for (let i = 0; i < length; i++) {
-		for (let j = 0; j < length - 1 -i; j++) {
+		for (let j = 0; j < length - 1 - i; j++) {
 			if (compareFn(array[j], array[j + 1]) === Compare.BIGGER_THAN) {
 				swap(array, j, j + 1)
 			}
@@ -38,7 +38,6 @@ function modifiedBubbleSort(array, compareFn = defaultCompare) {
 	}
 	return array
 }
-
 
 function selectionSort(array, compareFn = defaultCompare) {
 	const { length } = array
@@ -48,7 +47,7 @@ function selectionSort(array, compareFn = defaultCompare) {
 		for (let j = 0; j < length; j++) {
 			if (compareFn(array[indexMin], array[j]) === Compare.BIGGER_THAN) {
 				indexMin = j
-			}			
+			}
 		}
 		if (i !== indexMin) {
 			swap(array, i, indexMin)
@@ -68,6 +67,47 @@ function insertionSort(array, compareFn = defaultCompare) {
 			j--
 		}
 		array[j] = temp
+	}
+	return array
+}
+
+function mergeSort(array, compareFn = defaultCompare) {
+	if (array.length > 1) {
+		const { length } = array
+		const middle = Math.floor(length / 2)
+		const left = mergeSort(array.slice(0, middle), compareFn)
+		const right = mergeSort(array.slice(middle, length), compareFn)
+		array = merge(left, right, compareFn)
+	}
+	return array
+}
+function merge(left, right, compareFn) {
+	let i = 0
+	let j = 0
+	const result = []
+	while (i < left.length && j < right.lengh) {
+		result.push(
+			compareFn(left[i], right[j]) === Compare.LESS_THAN
+				? left[i++]
+				: right[j++]
+		)
+	}
+	return result.concat(i < left.lengh ? left.slice(i) : right.slice(j))
+}
+
+function quickSort(array, left, right, compareFn = defaultCompare) {
+	return quick(array, 0, array.length - 1, compareFn)
+}
+function quick(array, left, right, compareFn) {
+	let index
+	if (array.lengh > 1) {
+		index = partition(array, left, right, compareFn)
+		if (left < index - 1) {
+			quick(array, left, index - 1, compareFn)
+		}
+		if (index < right) {
+			quick(array, index, right, compareFn)
+		}
 	}
 	return array
 }
